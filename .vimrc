@@ -3,7 +3,6 @@ if &compatible
 endif
 
 let mapleader=","
-let g:mapleader=","
 
 set number
 set numberwidth=4
@@ -15,6 +14,7 @@ set title
 set wildmenu
 set wildmode=list:longest,full
 set colorcolumn=80
+" set nowrap
 
 set esckeys
 set ignorecase
@@ -58,22 +58,22 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'wincent/Command-T'
-Plugin 'mileszs/ack.vim'
-Plugin 'jimenezrick/vimerl'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
 Plugin 'Raimondi/delimitMate'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'raymond-w-ko/vim-niji'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'mattn/emmet-vim'
 Plugin 'mhinz/vim-startify'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdtree'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'vim-erlang/vim-erlang-compiler'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
+Plugin 'tComment'
+" Plugin 'latex-box-team/latex-box'
 
 call vundle#end()
 
@@ -82,12 +82,18 @@ filetype indent on
 " =======
 
 let g:syntastic_javascript_checkers = ['gjslint', 'jshint']
+let g:syntastic_erlang_checkers = ['escript']
+let g:syntastic_cpp_checkers = ['cpplint', 'gcc']
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 let &t_Co=256
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
-set background=light
+set background=dark
 colorscheme solarized
 
 set wildignore=*.beam,*.pyc
@@ -95,7 +101,7 @@ set wildignore=*.beam,*.pyc
 let g:gitgutter_max_signs=7777
 
 set list
-set listchars=tab:\➪\ 
+set listchars=tab:\|\ 
 
 map <leader>\           :tabnew<cr>
 map <leader>1           :tabnext 1<cr>
@@ -108,4 +114,29 @@ map <leader>7           :tabnext 7<cr>
 
 map <leader><tab>       :set noexpandtab<cr>
 map <leader><space>     :set expandtab<cr>
+
+let g:CommandTFileScanner = "git"
+
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config set tabstop=4
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config set shiftwidth=4
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config set expandtab
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config set filetype=erlang
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config hi erlangBIF ctermfg=64 cterm=bold
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config hi erlangBoolean ctermfg=64 cterm=bold
+autocmd BufRead,BufNewFile *.erl,*.hrl,*.config hi erlangVariable ctermfg=61 cterm=bold
+
+autocmd BufRead,BufNewFile *.py set tabstop=4
+autocmd BufRead,BufNewFile *.py set shiftwidth=4
+autocmd BufRead,BufNewFile *.py set expandtab
+
+autocmd BufRead,BufNewFile *.cpp,*.h set tabstop=2
+autocmd BufRead,BufNewFile *.cpp,*.h set shiftwidth=2
+autocmd BufRead,BufNewFile *.cpp,*.h set expandtab
+
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_register_as_syntastic_checker = 1
+let g:Show_diagnostics_ui = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
