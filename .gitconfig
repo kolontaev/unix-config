@@ -1,0 +1,27 @@
+[core]
+	editor = /usr/local/bin/vim
+	precomposeunicode = true
+	pager = less -x4
+[push]
+	default = current
+[alias]
+	ci = commit
+	co = checkout
+	cob = checkout -b
+	cib = commit -m \".\"
+	pro = pull --rebase origin master
+	ri = rebase --interactive
+	pf = push --force
+	lg = log --name-only
+	ril = rebase --interactive HEAD~2
+	xpro = pull --rebase -Xignore-space-change origin master
+	rc = rebase --continue
+	au = add -u
+	log1 = log --oneline
+	graph = log --oneline --decorate --all --graph --abbrev-commit
+[pull]
+	rebase = true
+[help]
+	autocorrect = 1
+[diff]
+	compactionHeuristic = true
